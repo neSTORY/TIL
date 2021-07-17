@@ -64,7 +64,72 @@ Untracked files:
         a.txt # 무대에서 내려옴!!
 ```
 
-![](md-images/image-20210706143940012.png)
+![](md-images/image-20210706143516204.png)
+
+
+
+coomit을 남겨보자!
+
+```bash
+$ git add .
+$ git commit -m "first commit"
+[master (root-commit) b560128] first commit
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 READ.md
+ create mode 100644 a.txt
+```
+
+
+
+### 두 번째 - `restore`
+
+- 두 개의 **파일을 모두 수정**하고  따로따로 커밋하려고 했지만, 실수로 `$ git add .`라고 해버린 상황
+
+
+
+a.txt, README.md 파일에 각각 메시지를 남겨보자
+
+```bash
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   READ.md
+        modified:   a.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+$ git add .
+
+# status
+$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   READ.md
+        modified:   a.txt
+```
+
+```bash
+$ git restore --staged a.txt
+$ git status
+On branch master
+Changes to be committed: # SA에 있는 파일
+  (use "git restore --staged <file>..." to unstage)
+        modified:   READ.md
+
+Changes not staged for commit: # WD에 있는 파일
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   a.txt # 한 번 이상이라도 commit이 됐었음
+```
+
+
+
+![](md-images/image-20210706143940012-1626509572992.png)
+
+
 
 ### 첫 번째와 두 번째 뭐가 다를까요?
 
@@ -107,7 +172,7 @@ add가 되어있지 않은(WD에 있는) + 수정된(modified) a.txt를 다시 �
 
 
 
-**주의!!!!!!!**
+**주의!!!!!**
 
 - 원래 파일로 돌아갔기 때문에 '절대로' 다시 되돌릴 수 없음
 - 수정한 내용이 마음에 들지 않을 때만 사용해야 함(정말 마음에 안들때만 사용해야함)
